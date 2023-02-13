@@ -18,26 +18,26 @@
   <arg name="config" default="$(optenv DINGO_CONFIG base)" />
 
   <!-- Robot Spawn Poses -->
-  <arg name="x1"     default="-1.0"/>
-  <arg name="y1"     default="0"/>
+  <arg name="x1"     default="0.6"/>
+  <arg name="y1"     default="0.6"/>
   <arg name="z1"     default="0.1"/>
   <arg name="yaw1"   default="0"/>
   <arg name="name1"   default="d1"/>
 
-  <arg name="x2"     default="1.0"/>
-  <arg name="y2"     default="0"/>
+  <arg name="x2"     default="-0.6"/>
+  <arg name="y2"     default="0.6"/>
   <arg name="z2"     default="0.1"/>
   <arg name="yaw2"   default="0"/>
   <arg name="name2"   default="d2"/>
 
-  <arg name="x3"     default="0.0"/>
-  <arg name="y3"     default="1.0"/>
+  <arg name="x3"     default="-0.6"/>
+  <arg name="y3"     default="-0.6"/>
   <arg name="z3"     default="0.1"/>
   <arg name="yaw3"   default="0"/>
   <arg name="name3"   default="d3"/>
 
-  <arg name="x4"     default="0.0"/>
-  <arg name="y4"     default="-1.0"/>
+  <arg name="x4"     default="0.6"/>
+  <arg name="y4"     default="-0.6"/>
   <arg name="z4"     default="0.1"/>
   <arg name="yaw4"   default="0"/>
   <arg name="name4"   default="d4"/>
@@ -88,7 +88,8 @@
   </group>
 
   <!-- RVIZ -->
-  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find dingo_viz)/rviz/multi_dingo.rviz" output="screen"/>
+  <!-- <node type="rviz" name="rviz" pkg="rviz" args="-d $(find dingo_viz)/rviz/multi_dingo.rviz" output="screen"/> -->
+  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find dingo_viz)/rviz/multi_dingo_with_cloth_sim.rviz" output="screen"/>
 
   <!-- RQT EZ publisher -->
   <node type="rqt_ez_publisher" name="rqt_ez_publisher" pkg="rqt_ez_publisher" output="screen">
