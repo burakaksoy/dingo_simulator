@@ -85,12 +85,21 @@
     <!-- <arg name="joystick" value="$(arg joystick)"/> -->
   <!-- </include> -->
 
-  <node type="wrench_transformer_node.py" name="wrench_transformer_node" pkg="wrench_transformer" output="screen">
+  <node type="wrench_transformer_node.py" name="wrench_transformer_node" pkg="topic_tf_transformers" output="screen">
     <!-- <rosparam command="load" file="/home/burak/ez_cmd_vel_multi_dingo.yaml" subst_value="true" /> -->
     <rosparam param="wrench_topic_name_out" subst_value="True">fabric_force</rosparam>
     <rosparam param="wrench_topic_name_in"  subst_value="True">fabric_wrench_stamped</rosparam>
     <rosparam param="tf_a_frame_name"       subst_value="True">$(arg tf_prefix)fabric_mount_link</rosparam>
     <rosparam param="tf_b_frame_name"       subst_value="True">$(arg tf_prefix)base_link</rosparam>
+    <rosparam param="pub_rate"              subst_value="True">100.0</rosparam>
+  </node>
+
+  <node type="odom_transformer_node.py" name="odom_transformer_node" pkg="topic_tf_transformers" output="screen">
+    <!-- <rosparam command="load" file="/home/burak/ez_cmd_vel_multi_dingo.yaml" subst_value="true" /> -->
+    <rosparam param="odom_topic_name_out" subst_value="True">ground_truth/fabric_mount/odom</rosparam>
+    <rosparam param="odom_topic_name_in"  subst_value="True">ground_truth/odom</rosparam>
+    <rosparam param="tf_a_frame_name"       subst_value="True">$(arg tf_prefix)base_link</rosparam>
+    <rosparam param="tf_b_frame_name"       subst_value="True">$(arg tf_prefix)fabric_mount_link</rosparam>
     <rosparam param="pub_rate"              subst_value="True">100.0</rosparam>
   </node>
   
