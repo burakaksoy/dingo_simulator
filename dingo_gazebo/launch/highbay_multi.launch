@@ -1,0 +1,98 @@
+<launch>
+  <arg name="use_sim_time" default="true" />
+  <arg name="gui" default="true" />
+  <arg name="headless" default="false" />
+  <arg name="world_name" default="$(find lab_gazebo)/worlds/highbay_swarm.world" />
+
+  <!-- Launch Gazebo with the specified world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="debug" value="0" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="use_sim_time" value="$(arg use_sim_time)" />
+    <arg name="headless" value="$(arg headless)" />
+    <arg name="world_name" value="$(arg world_name)" />
+  </include>
+
+  <!-- Configuration of Dingo which you would like to simulate.
+       See dingo_description for details. -->
+  <arg name="config" default="$(optenv DINGO_CONFIG base)" />
+
+  <!-- Robot Spawn Poses -->
+  <arg name="x1"     default="-1.0"/>
+  <arg name="y1"     default="0"/>
+  <arg name="z1"     default="0.1"/>
+  <arg name="yaw1"   default="0"/>
+  <arg name="name1"   default="d1"/>
+
+  <arg name="x2"     default="1.0"/>
+  <arg name="y2"     default="0"/>
+  <arg name="z2"     default="0.1"/>
+  <arg name="yaw2"   default="0"/>
+  <arg name="name2"   default="d2"/>
+
+  <arg name="x3"     default="0.0"/>
+  <arg name="y3"     default="1.0"/>
+  <arg name="z3"     default="0.1"/>
+  <arg name="yaw3"   default="0"/>
+  <arg name="name3"   default="d3"/>
+
+  <arg name="x4"     default="0.0"/>
+  <arg name="y4"     default="-1.0"/>
+  <arg name="z4"     default="0.1"/>
+  <arg name="yaw4"   default="0"/>
+  <arg name="name4"   default="d4"/>
+
+  <!-- Spawn the robots -->
+  <group ns="$(arg name1)">
+    <include file="$(dirname)/spawn_dingo_multi.launch" >
+      <arg name="x"         value="$(arg x1)" />
+      <arg name="y"         value="$(arg y1)" />
+      <arg name="z"         value="$(arg z1)" />
+      <arg name="yaw"       value="$(arg yaw1)" />
+      <arg name="robot_namespace"  value="$(arg name1)" />
+      <arg name="config"  value="$(arg config)" />
+    </include>
+  </group>
+
+  <group ns="$(arg name2)">
+    <include file="$(dirname)/spawn_dingo_multi.launch" >
+      <arg name="x"         value="$(arg x2)" />
+      <arg name="y"         value="$(arg y2)" />
+      <arg name="z"         value="$(arg z2)" />
+      <arg name="yaw"       value="$(arg yaw2)" />
+      <arg name="robot_namespace"  value="$(arg name2)" />
+      <arg name="config"  value="$(arg config)" />
+    </include>
+  </group>
+
+  <group ns="$(arg name3)">
+    <include file="$(dirname)/spawn_dingo_multi.launch" >
+      <arg name="x"         value="$(arg x3)" />
+      <arg name="y"         value="$(arg y3)" />
+      <arg name="z"         value="$(arg z3)" />
+      <arg name="yaw"       value="$(arg yaw3)" />
+      <arg name="robot_namespace"  value="$(arg name3)" />
+      <arg name="config"  value="$(arg config)" />
+    </include>
+  </group>
+
+  <group ns="$(arg name4)">
+    <include file="$(dirname)/spawn_dingo_multi.launch" >
+      <arg name="x"         value="$(arg x4)" />
+      <arg name="y"         value="$(arg y4)" />
+      <arg name="z"         value="$(arg z4)" />
+      <arg name="yaw"       value="$(arg yaw4)" />
+      <arg name="robot_namespace"  value="$(arg name4)" />
+      <arg name="config"  value="$(arg config)" />
+    </include>
+  </group>
+
+
+  <!-- RVIZ -->
+  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find dingo_viz)/rviz/multi_dingo.rviz" output="screen"/>
+
+  <!-- RQT EZ publisher -->
+  <node type="rqt_ez_publisher" name="rqt_ez_publisher" pkg="rqt_ez_publisher" output="screen">
+    <rosparam command="load" file="/home/burak/ez_cmd_vel_multi_dingo.yaml" subst_value="true" />
+  </node>
+</launch>
