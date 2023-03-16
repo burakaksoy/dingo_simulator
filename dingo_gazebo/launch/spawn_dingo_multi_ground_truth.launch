@@ -10,6 +10,9 @@
   <!-- Generate the tf_prefix from the namespace -->
   <arg name="tf_prefix" default="$(arg robot_namespace)_tf_" />
 
+  <arg name="uwb_tag_1_id"       default="0"/>
+  <arg name="uwb_tag_2_id"       default="1"/>
+
   <!-- Configuration of Dingo which you would like to simulate.
       See dingo_description for details. -->
   <arg name="config" default="$(optenv DINGO_CONFIG base)" />
@@ -20,6 +23,8 @@
                   $(find xacro)/xacro $(find dingo_description)/urdf/dingo-o-prefixed.urdf.xacro
                   robot_namespace:=$(arg robot_namespace)
                   tf_prefix:=$(arg tf_prefix)
+                  uwb_tag_1_id:=$(arg uwb_tag_1_id)
+                  uwb_tag_2_id:=$(arg uwb_tag_2_id)
                   " />
 
   <rosparam command="load" file="$(dirname)/../config/gains_omni_multi.yaml" />
