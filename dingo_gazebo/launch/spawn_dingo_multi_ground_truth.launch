@@ -13,6 +13,8 @@
   <arg name="uwb_tag_1_id"       default="0"/>
   <arg name="uwb_tag_2_id"       default="1"/>
 
+  <node pkg="tf" type="static_transform_publisher" name="map_to_odom_tf_broadcaster" args="$(arg x) $(arg y) 0 $(arg yaw) 0 0 map $(arg tf_prefix)odom 100" />
+
   <!-- Configuration of Dingo which you would like to simulate.
       See dingo_description for details. -->
   <arg name="config" default="$(optenv DINGO_CONFIG base)" />
@@ -72,6 +74,16 @@
     <rosparam param="publish_pose" subst_value="True">false</rosparam>
     <rosparam param="publish_euler" subst_value="True">false</rosparam>
   </node>
+
+  <!-- EKF localization -->
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization" output="screen">
+    <rosparam command="load" file="$(find swarm2_launch)/config/robot_localization.yaml" />  
+
+    <rosparam param="base_link_frame" subst_value="True">$(arg tf_prefix)base_link</rosparam>
+    <rosparam param="odom_frame" subst_value="True">$(arg tf_prefix)odom</rosparam>
+    <rosparam param="world_frame" subst_value="True">$(arg tf_prefix)odom</rosparam>
+  </node>
+
 
 
   <node pkg="twist_mux" type="twist_mux" name="twist_mux">

@@ -62,6 +62,11 @@
       <arg name="uwb_tag_1_id"       value="$(arg uwb_tag_1_id1)"/>
       <arg name="uwb_tag_2_id"       value="$(arg uwb_tag_2_id1)"/>
     </include>
+
+    <include file="$(find uwb_pose_publisher)/launch/uwb_pose_publisher.launch" >
+      <arg name="config_file"              value="$(find swarm2_launch)/config/d1_uwb_pose_publisher.yaml" />
+      <arg name="antenna_calib_file"       value="$(find swarm2_launch)/config/antenna_calibration.yaml" />
+    </include>
   </group>
 
   <group ns="$(arg name2)">
@@ -74,6 +79,11 @@
       <arg name="config"  value="$(arg config)" />
       <arg name="uwb_tag_1_id"       value="$(arg uwb_tag_1_id2)"/>
       <arg name="uwb_tag_2_id"       value="$(arg uwb_tag_2_id2)"/>
+    </include>
+
+    <include file="$(find uwb_pose_publisher)/launch/uwb_pose_publisher.launch" >
+      <arg name="config_file"              value="$(find swarm2_launch)/config/d2_uwb_pose_publisher.yaml" />
+      <arg name="antenna_calib_file"       value="$(find swarm2_launch)/config/antenna_calibration.yaml" />
     </include>
   </group>
 
@@ -88,6 +98,11 @@
       <arg name="uwb_tag_1_id"       value="$(arg uwb_tag_1_id3)"/>
       <arg name="uwb_tag_2_id"       value="$(arg uwb_tag_2_id3)"/>
     </include>
+
+    <include file="$(find uwb_pose_publisher)/launch/uwb_pose_publisher.launch" >
+      <arg name="config_file"              value="$(find swarm2_launch)/config/d3_uwb_pose_publisher.yaml" />
+      <arg name="antenna_calib_file"       value="$(find swarm2_launch)/config/antenna_calibration.yaml" />
+    </include>
   </group>
 
   <group ns="$(arg name4)">
@@ -100,6 +115,11 @@
       <arg name="config"  value="$(arg config)" />
       <arg name="uwb_tag_1_id"       value="$(arg uwb_tag_1_id4)"/>
       <arg name="uwb_tag_2_id"       value="$(arg uwb_tag_2_id4)"/>
+    </include>
+
+    <include file="$(find uwb_pose_publisher)/launch/uwb_pose_publisher.launch" >
+      <arg name="config_file"              value="$(find swarm2_launch)/config/d4_uwb_pose_publisher.yaml" />
+      <arg name="antenna_calib_file"       value="$(find swarm2_launch)/config/antenna_calibration.yaml" />
     </include>
   </group>
 
