@@ -13,7 +13,8 @@
   <arg name="uwb_tag_1_id"       default="0"/>
   <arg name="uwb_tag_2_id"       default="1"/>
 
-  <node pkg="tf" type="static_transform_publisher" name="map_to_odom_tf_broadcaster" args="$(arg x) $(arg y) 0 $(arg yaw) 0 0 map $(arg tf_prefix)odom 100" />
+  <!-- <node pkg="tf" type="static_transform_publisher" name="map_to_odom_tf_broadcaster" args="$(arg x) $(arg y) 0 $(arg yaw) 0 0 map $(arg tf_prefix)odom 100" /> -->
+  <node pkg="tf" type="static_transform_publisher" name="map_to_odom_tf_broadcaster" args="0 0 0 0 0 0 map $(arg tf_prefix)odom 100" />
 
   <!-- Configuration of Dingo which you would like to simulate.
       See dingo_description for details. -->
@@ -89,6 +90,7 @@
   <node pkg="twist_mux" type="twist_mux" name="twist_mux">
     <rosparam command="load" file="$(find dingo_control)/config/twist_mux.yaml" />
     <remap from="cmd_vel_out" to="dingo_velocity_controller/cmd_vel"/>
+    <remap from="e_stop" to="/e_stop"/>
   </node>
 
   <rosparam command="load" file="$(arg config_extras)" subst_value="true" />
